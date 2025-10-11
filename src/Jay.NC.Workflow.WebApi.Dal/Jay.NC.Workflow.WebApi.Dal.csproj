@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Jay.NC.Workflow.WebApi.Storage\Jay.NC.Workflow.WebApi.Storage.csproj" />
+  </ItemGroup>
+
 </Project>

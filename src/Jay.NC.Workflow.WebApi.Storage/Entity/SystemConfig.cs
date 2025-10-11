@@ -9,56 +9,53 @@ using System.Threading.Tasks;
 
 namespace Jay.NC.Workflow.WebApi.Storage.Entity
 {
-    [Table("department")]
-    public class Department:BaseEntity
+    /// <summary>
+    /// 系统配置表
+    /// </summary>
+    [Table("system_config")]
+    public class SystemConfig : BaseEntity
     {
         /// <summary>
-        /// 部门id
+        /// 配置key
         /// </summary>
-        [Column("dept_id")]
-        public Guid DeptId { get; set; }
+        [Column("config_key")]
+        public string ConfigKey { get; set; } = string.Empty;
 
         /// <summary>
-        /// 部门名称
+        /// 配置名称
         /// </summary>
-        [Column("dept_name")]
-        public string DeptName { get; set; } = string.Empty;
+        [Column("config_name")]
+        public string ConfigName { get; set; }= string.Empty;
 
         /// <summary>
-        /// 部门图标
+        /// 配置值
         /// </summary>
-        [Column("dept_icon")]
-        public string? DeptIcon { get; set; }
+        [Column("config_value")]
+        public string ConfigValue { get; set; }=string.Empty;
 
         /// <summary>
-        /// 部门类型id
+        /// 配置类型
         /// </summary>
-        [Column("dept_type_id")]
-        public int? DeptTypeId { get; set; }
+        [Column("config_type")]
+        public ConfigTypeEnum ConfigType { get; set; } = ConfigTypeEnum.None;
 
         /// <summary>
-        /// 部门类型名称
+        /// 扩展数据
         /// </summary>
-        [Column("dept_type_name")]
-        public string? DeptTypeName { get; set; }
+        [Column("ext_data")]
+        public string? ExtData { get; set; }
 
         /// <summary>
-        /// 上级部门id
-        /// </summary>
-        [Column("parent_dept_id")]
-        public Guid? ParentDeptId { get; set; }
-
-        /// <summary>
-        /// 启用状态，0：禁用，1：启用'
-        /// </summary>
-        [Column("status")]
-        public EnableDisableEnum Status { get; set; } = EnableDisableEnum.Enable;
-
-        /// <summary>
-        /// 排序
+        /// 排序编号
         /// </summary>
         [Column("sort_no")]
         public int SortNo { get; set; }
+
+        /// <summary>
+        /// 启用状态，0：禁用，1：启用
+        /// </summary>
+        [Column("status")]
+        public EnableDisableEnum Status { get; set; } = EnableDisableEnum.Enable;
 
         /// <summary>
         /// 备注

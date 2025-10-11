@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Jay.NC.Workflow.WebApi.Dal\Jay.NC.Workflow.WebApi.Dal.csproj" />
+  </ItemGroup>
+
 </Project>
