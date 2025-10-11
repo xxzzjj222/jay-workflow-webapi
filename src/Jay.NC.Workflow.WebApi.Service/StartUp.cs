@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Jay.NC.Workflow.WebApi.Common.Orms.EFCore;
+using Jay.NC.Workflow.WebApi.Service.Extensions;
 
 namespace Jay.NC.Workflow.WebApi.Service
 {
@@ -65,6 +66,9 @@ namespace Jay.NC.Workflow.WebApi.Service
                 options.OperationFilter<SecurityRequirementsOperationFilter>(true, "Bearer");
 
             });
+
+            //BusinessObject
+            services.AddBussinessObjectInjection();
 
         }
 
