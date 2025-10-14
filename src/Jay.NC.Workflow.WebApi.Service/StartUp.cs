@@ -1,11 +1,14 @@
 ﻿using Jay.NC.Workflow.WebApi.Common.Consts;
+using Jay.NC.Workflow.WebApi.Common.Orms.EFCore;
 using Jay.NC.Workflow.WebApi.Common.Uow;
+using Jay.NC.Workflow.WebApi.Common.Utils;
+using Jay.NC.Workflow.WebApi.Service.Extensions;
+using Jay.NC.Workflow.WebApi.Service.Filters;
 using Jay.NC.Workflow.WebApi.Storage.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using Jay.NC.Workflow.WebApi.Common.Orms.EFCore;
-using Jay.NC.Workflow.WebApi.Service.Extensions;
+using System.Reflection;
 
 namespace Jay.NC.Workflow.WebApi.Service
 {
@@ -15,7 +18,7 @@ namespace Jay.NC.Workflow.WebApi.Service
 
         public StartUp(IConfiguration configuration) => Configuration = configuration;
 
-        public void ConfigureService(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             DisplayConfig();
 
@@ -29,6 +32,9 @@ namespace Jay.NC.Workflow.WebApi.Service
             }, ServiceLifetime.Scoped);
 
             services.AddScoped<IUnitOfWork, UnitOfWork<WorkflowDbContext>>();
+
+            //Route
+            services.AddControllers();
 
             // Swagger
             services.AddSwaggerGen(options =>
@@ -70,6 +76,9 @@ namespace Jay.NC.Workflow.WebApi.Service
             //BusinessObject
             services.AddBussinessObjectInjection();
 
+            //StartUpFilter
+            services.AddTransient<IStartupFilter, MigrateStartupFilter>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -93,6 +102,13 @@ namespace Jay.NC.Workflow.WebApi.Service
             }
 
             app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            EnumHelper.InitEnumItemDtosDic("Jay.NC.Workflow.WebApi.Model");
+            EnumHelper.InitEnumItemDtosDic("Jay.NC.Workflow.WebApi.Common");
         }
 
         /// <summary>

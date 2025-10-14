@@ -19,4 +19,9 @@
     <ProjectReference Include="..\Jay.NC.Workflow.WebApi.Bll\Jay.NC.Workflow.WebApi.Bll.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\Pretreat\v0.1.0\" />
+    <Folder Include="Migrations\Upgrade\v0.1.0\" />
+  </ItemGroup>
+
 </Project>

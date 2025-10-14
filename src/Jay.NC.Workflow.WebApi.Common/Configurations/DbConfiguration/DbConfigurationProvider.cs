@@ -22,7 +22,7 @@ namespace Jay.NC.Workflow.WebApi.Common.Configurations.DbConfiguration
             ValidateOptionArgs();
 
             var condition = _dbConfigurationOption.ConfigType.HasValue ? $" and config_type={(int)_dbConfigurationOption.ConfigType}" : string.Empty;
-            var commandText = $"select {_dbConfigurationOption.ConfigKeyField} as key,{_dbConfigurationOption.ConfigValueField} as value from {_dbConfigurationOption.TableName} where status=1{condition};";
+            var commandText = $"select {_dbConfigurationOption.ConfigKeyField} as `key`,{_dbConfigurationOption.ConfigValueField} as value from {_dbConfigurationOption.TableName} where status=1{condition};";
 
             using var mysqlConnection = new MySqlConnection(_dbConfigurationOption.ConnStr);
             mysqlConnection.Open();

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Jay.NC.Workflow.WebApi.Model\Jay.NC.Workflow.WebApi.Model.csproj" />
     <ProjectReference Include="..\Jay.NC.Workflow.WebApi.Storage\Jay.NC.Workflow.WebApi.Storage.csproj" />
   </ItemGroup>
 

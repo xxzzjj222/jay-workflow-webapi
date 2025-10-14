@@ -1,4 +1,5 @@
-﻿using Jay.NC.Workflow.WebApi.Common.Interface;
+﻿using Jay.NC.Workflow.WebApi.Common.Enums;
+using Jay.NC.Workflow.WebApi.Common.Interface;
 using Jay.NC.Workflow.WebApi.Storage.Entity;
 using Jay.NC.Workflow.WebApi.Storage.Entity.Base;
 using Microsoft.EntityFrameworkCore;
@@ -14,13 +15,13 @@ namespace Jay.NC.Workflow.WebApi.Storage.Context
     {
         private readonly IHttpContextUtility _httpContextUtility;
 
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public WorkflowDbContext(IHttpContextUtility httpContextUtility)
-        {
-            _httpContextUtility = httpContextUtility;
-        }
+        ///// <summary>
+        ///// 构造函数
+        ///// </summary>
+        //public WorkflowDbContext(IHttpContextUtility httpContextUtility)
+        //{
+        //    _httpContextUtility = httpContextUtility;
+        //}
 
         /// <summary>
         /// 构造函数
@@ -38,10 +39,19 @@ namespace Jay.NC.Workflow.WebApi.Storage.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Department>(e =>
-            {
-                e.Property(e => e.Id).HasDefaultValueSql("nextval('config.data_source_id_seq'::regclass)");
-            });
+            modelBuilder.Entity<SystemConfig>().HasData(
+                new SystemConfig()
+                {
+                    Id = 1,
+                    ConfigKey = "IsEnableSwagger",
+                    ConfigName = "是否启用Swagger",
+                    ConfigValue = "true",
+                    ExtData = "",
+                    SortNo = 1,
+                    Status = EnableDisableEnum.Enable,
+                    Remark = null,
+                    ConfigType = ConfigTypeEnum.Env
+                });
         }
 
         public override int SaveChanges()

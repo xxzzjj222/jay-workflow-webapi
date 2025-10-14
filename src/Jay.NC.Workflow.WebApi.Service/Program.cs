@@ -30,7 +30,7 @@ namespace Jay.NC.Workflow.WebApi.Service
                 {
                     configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: false, reloadOnChange: true)
-                    //.AddDbConfiguration()
+                    .AddDbConfiguration()
                     .AddEnvironmentVariables();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
