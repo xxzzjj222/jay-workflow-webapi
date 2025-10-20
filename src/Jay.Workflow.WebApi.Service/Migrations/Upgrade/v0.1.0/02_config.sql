@@ -1,0 +1,1 @@
+﻿INSERT INTO workflow_dev.system_config (config_key, config_name, config_value, config_type, ext_data, sort_no, status, remark, creator, created_time, modifier, modified_time, deleter, deleted_time) VALUES ('IsEnableSwagger', '是否启用Swagger', 'true', 2, '', 1, 1, null, 0, '0001-01-01 00:00:00', null, null, null, null);

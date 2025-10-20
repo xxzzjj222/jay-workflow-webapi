@@ -1,0 +1,6 @@
+@Jay.Workflow.WebApi.Service.Tests_HostAddress = http://localhost:5170
+
+GET {{Jay.Workflow.WebApi.Service.Tests_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
