@@ -1,4 +1,5 @@
-﻿using Jay.Workflow.WebApi.Common.Models;
+﻿using Jay.Workflow.WebApi.Common.Interface.Base;
+using Jay.Workflow.WebApi.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

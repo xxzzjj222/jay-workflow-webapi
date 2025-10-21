@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Util\" />
     <Folder Include="Migrations\Pretreat\v0.1.0\" />
     <Folder Include="Migrations\Upgrade\v0.1.0\" />
   </ItemGroup>

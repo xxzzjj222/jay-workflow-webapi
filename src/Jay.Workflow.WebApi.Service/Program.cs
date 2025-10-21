@@ -1,4 +1,5 @@
 using Jay.Workflow.WebApi.Common.Configurations.DbConfiguration;
+using Jay.Workflow.WebApi.Common.DynamicInterceptor;
 using Jay.Workflow.WebApi.Service.Extensions;
 using Serilog;
 
@@ -36,7 +37,7 @@ namespace Jay.Workflow.WebApi.Service
                 {
                     webBuilder.UseStartup<StartUp>();
                 })
-                //.ConfigureDynamicInterceptor()
+                .ConfigureDynamicInterceptor()
                 .UseSerilog();
     }
 }

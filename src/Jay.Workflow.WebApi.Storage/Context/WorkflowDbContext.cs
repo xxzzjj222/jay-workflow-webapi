@@ -36,6 +36,12 @@ namespace Jay.Workflow.WebApi.Storage.Context
 
         public DbSet<Department> Department { get; set; }
         public DbSet<SystemConfig> SystemConfig { get; set; }
+        public DbSet<Resource> Resource { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Role> Role { get; set; }
+        public DbSet<UserRole> UserRole { get; set; }
+        public DbSet<UserDepartment> UserDepartment { get; set; }
+        public DbSet<RoleResource> RoleResource { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

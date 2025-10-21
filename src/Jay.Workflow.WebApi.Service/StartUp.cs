@@ -1,4 +1,5 @@
-﻿using Jay.Workflow.WebApi.Common.Consts;
+﻿using Jay.Workflow.WebApi.Common.Cache;
+using Jay.Workflow.WebApi.Common.Consts;
 using Jay.Workflow.WebApi.Common.Orms.EFCore;
 using Jay.Workflow.WebApi.Common.Uow;
 using Jay.Workflow.WebApi.Common.Utils;
@@ -8,6 +9,7 @@ using Jay.Workflow.WebApi.Storage.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using StackExchange.Redis;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 
@@ -36,6 +38,17 @@ namespace Jay.Workflow.WebApi.Service
             }, ServiceLifetime.Scoped);
 
             services.AddScoped<IUnitOfWork, UnitOfWork<WorkflowDbContext>>();
+
+            //Cache
+            services.AddSingleton<IConnectionMultiplexer>(sp =>
+            {
+                string redisConnectionString = Configuration["Redis:Server"];
+                return ConnectionMultiplexer.Connect(redisConnectionString);
+            });
+            services.AddScoped<ICacheService>(sp =>
+            {
+                return new CacheService(sp.GetRequiredService<IConnectionMultiplexer>(), 0);
+            });
 
             //Route
             services.AddControllers();
@@ -84,7 +97,7 @@ namespace Jay.Workflow.WebApi.Service
             services.AddBussinessObjectInjection();
 
             //StartUpFilter
-            services.AddTransient<IStartupFilter, MigrateStartupFilter>(); //使用EFCore Migration
+            //services.AddTransient<IStartupFilter, MigrateStartupFilter>(); //使用EFCore Migration
 
         }
 

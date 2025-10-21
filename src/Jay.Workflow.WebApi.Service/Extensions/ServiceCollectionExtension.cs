@@ -1,4 +1,4 @@
-﻿using Jay.Workflow.WebApi.Common.Interface;
+﻿using Jay.Workflow.WebApi.Common.Interface.Base;
 using Jay.Workflow.WebApi.Common.Utils;
 using Serilog;
 using Serilog.Events;
