@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Jay.Workflow.WebApi.Common.Exceptions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         {
             if (args == Guid.Empty)
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -33,7 +34,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         {
             if (args)
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -46,7 +47,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         {
             if (args == null)
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -59,7 +60,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         {
             if (args != null && args.ToString() == "Sim")
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -72,7 +73,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         {
             if (string.IsNullOrWhiteSpace(args))
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -85,7 +86,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         {
             if (args == DateTime.MinValue)
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -105,7 +106,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
             }
             catch (Exception)
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -126,12 +127,12 @@ namespace Jay.Workflow.WebApi.Common.Utils
                 // 校验是否为闭区间
                 if (values is null || values.Length != 2 || values[0] > values[1])
                 {
-                    throw new Exception(message);
+                    throw new InvalidParameterException(message);
                 }
             }
             catch (Exception)
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -163,7 +164,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         {
             if (null == list || list.Count < 0)
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -177,7 +178,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         {
             if (args == null || args.Length > length)
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
 
@@ -195,7 +196,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
             Regex PhoneRegex = new Regex(PhonePattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             if(!PhoneRegex.IsMatch(args))
             {
-                throw new Exception(message);
+                throw new InvalidParameterException(message);
             }
         }
     }

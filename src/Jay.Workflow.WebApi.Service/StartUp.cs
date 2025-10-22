@@ -5,12 +5,14 @@ using Jay.Workflow.WebApi.Common.Uow;
 using Jay.Workflow.WebApi.Common.Utils;
 using Jay.Workflow.WebApi.Service.Extensions;
 using Jay.Workflow.WebApi.Service.Filters;
+using Jay.Workflow.WebApi.Service.Middlewares;
 using Jay.Workflow.WebApi.Storage.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using StackExchange.Redis;
 using Swashbuckle.AspNetCore.Filters;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 
 namespace Jay.Workflow.WebApi.Service
@@ -84,9 +86,9 @@ namespace Jay.Workflow.WebApi.Service
                     Type = SecuritySchemeType.ApiKey
                 });
 
-                options.OperationFilter<AddResponseHeadersFilter>();
-                options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
-                options.OperationFilter<SecurityRequirementsOperationFilter>(true, "Bearer");
+                //options.OperationFilter<AddResponseHeadersFilter>();
+                //options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+                //options.OperationFilter<SecurityRequirementsOperationFilter>(true, "Bearer");
 
             });
 
@@ -108,20 +110,29 @@ namespace Jay.Workflow.WebApi.Service
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
+            else
+            {
+                app.UseHsts();
+            }
 
             if (bool.TryParse(Configuration["IsEnableSwagger"],out var isEnableSwagger) && isEnableSwagger)
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
+                    c.DocExpansion(DocExpansion.List);
                     c.SwaggerEndpoint("/swagger/BusinessService/swagger.json", "Jay.Workflow.WebApi Business Service");
                     c.SwaggerEndpoint("/swagger/UtilService/swagger.json", "Jay.Workflow.WebApi Util Service");
                 });
             }
 
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

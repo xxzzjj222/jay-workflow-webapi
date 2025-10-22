@@ -1,4 +1,5 @@
 ﻿using Jay.Workflow.WebApi.Common.Attributes;
+using Jay.Workflow.WebApi.Common.Exceptions;
 using Jay.Workflow.WebApi.Common.Extensions;
 using Jay.Workflow.WebApi.Common.Models.Business;
 using System;
@@ -27,7 +28,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         public static void InitEnumItemDtosDic(string assemblyName)
         {
             var assembly = Assembly.Load(assemblyName);
-            if (assembly == null) throw new Exception($"未找到指定的程序集：{assemblyName}");
+            if (assembly == null) throw new InternalServerException($"未找到指定的程序集：{assemblyName}");
 
             var enumTypes=assembly.ExportedTypes.Where(a=>a.IsEnum).ToList();
             enumTypes.ForEach(e =>
@@ -54,7 +55,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
             // 如果所属类型不是枚举类，则抛出异常
             if (enumType.BaseType.Name != typeof(Enum).Name)
             {
-                throw new Exception("需要转换的类型必须为枚举类！");
+                throw new InternalServerException("需要转换的类型必须为枚举类！");
             }
 
             return Enum.GetValues(enumType)
@@ -76,7 +77,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
         {
             if (enumType.BaseType.Name != typeof(Enum).Name)
             {
-                throw new Exception("需要转换的类型必须为枚举类！");
+                throw new InternalServerException("需要转换的类型必须为枚举类！");
             }
 
             return Enum.GetValues(enumType).OfType<Enum>().Select(e => new EnumItemDto
@@ -101,7 +102,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
             // 如果枚举描述不存在为空，则抛出异常
             if (string.IsNullOrWhiteSpace(enumDesc))
             {
-                throw new Exception("枚举描述不存在！");
+                throw new InternalServerException("枚举描述不存在！");
             }
             var enumItem = Enum.GetValues(typeof(T)).OfType<T>().FirstOrDefault(p => p.ToDescription() == enumDesc);
             return enumItem;
@@ -118,7 +119,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
             // 如果枚举值为空，则抛出异常
             if (string.IsNullOrWhiteSpace(enumItemValue))
             {
-                throw new Exception("需要转换的枚举值不能为空！");
+                throw new InternalServerException("需要转换的枚举值不能为空！");
             }
 
             var isSuccess = Enum.TryParse<T>(enumItemValue, out var @enum);
@@ -137,7 +138,7 @@ namespace Jay.Workflow.WebApi.Common.Utils
             // 如果枚举值为空，则抛出异常
             if (string.IsNullOrWhiteSpace(enumItemValue))
             {
-                throw new Exception("需要转换的枚举值不能为空！");
+                throw new InternalServerException("需要转换的枚举值不能为空！");
             }
 
             var isSuccess = Enum.TryParse<T>(enumItemValue, out var @enum);

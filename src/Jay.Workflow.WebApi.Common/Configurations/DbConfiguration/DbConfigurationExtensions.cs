@@ -1,4 +1,5 @@
 ﻿using Jay.Workflow.WebApi.Common.Enums;
+using Jay.Workflow.WebApi.Common.Exceptions;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace Jay.Workflow.WebApi.Common.Configurations.DbConfiguration
     {
         public static IConfigurationBuilder AddDbConfiguration(this IConfigurationBuilder builder, string connStr, ConfigTypeEnum? configType = null)
         {
-            if (builder == null) throw new Exception(nameof(builder));
+            if (builder == null) throw new InternalServerException(nameof(builder));
 
-            if (string.IsNullOrWhiteSpace(connStr)) throw new Exception(nameof(connStr));
+            if (string.IsNullOrWhiteSpace(connStr)) throw new InternalServerException(nameof(connStr));
 
             var configOption = new DbConfigurationOption
             {
@@ -27,9 +28,9 @@ namespace Jay.Workflow.WebApi.Common.Configurations.DbConfiguration
 
         public static IConfigurationBuilder AddDbConfiguration(this IConfigurationBuilder builder, Action<DbConfigurationOption> optionAction)
         {
-            if (builder == null) throw new Exception(nameof(builder));
+            if (builder == null) throw new InternalServerException(nameof(builder));
 
-            if (optionAction == null) throw new Exception(nameof(optionAction));
+            if (optionAction == null) throw new InternalServerException(nameof(optionAction));
 
             var configOption = new DbConfigurationOption();
 

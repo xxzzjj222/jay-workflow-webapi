@@ -1,5 +1,6 @@
 ﻿using Jay.Workflow.WebApi.Common.Attributes;
 using Jay.Workflow.WebApi.Common.Enums;
+using Jay.Workflow.WebApi.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,7 @@ namespace Jay.Workflow.WebApi.Common.Extensions
         {
             if (enumItemValue == null)
             {
-                throw new Exception("转换的枚举值不能为空！");
+                throw new InternalServerException("转换的枚举值不能为空！");
             }
 
             var attribute = enumItemValue.GetAttribute<DescriptionAttribute>();
@@ -42,7 +43,7 @@ namespace Jay.Workflow.WebApi.Common.Extensions
         {
             if(enumItemValue == null)
             {
-                throw new Exception("转换的枚举值不能为空！");
+                throw new InternalServerException("转换的枚举值不能为空！");
             }
 
             var memberInfo = enumItemValue.GetType().GetMember(enumItemValue.ToString());
@@ -63,7 +64,7 @@ namespace Jay.Workflow.WebApi.Common.Extensions
         {
             if (enumItemValue == null)
             {
-                throw new Exception("转换的枚举值不能为空！");
+                throw new InternalServerException("转换的枚举值不能为空！");
             }
 
             var fieldInfo=enumItemValue.GetType().GetField(enumItemValue.ToString());

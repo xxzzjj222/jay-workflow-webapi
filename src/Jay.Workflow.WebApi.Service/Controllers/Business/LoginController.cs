@@ -2,6 +2,7 @@
 using Jay.Workflow.WebApi.Common.Utils;
 using Jay.Workflow.WebApi.Model.Dtos.Request.Login;
 using Jay.Workflow.WebApi.Service.Controllers.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jay.Workflow.WebApi.Service.Controllers.Business
@@ -14,12 +15,22 @@ namespace Jay.Workflow.WebApi.Service.Controllers.Business
     {
         private readonly ILoginService _loginService;
 
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <param name="loginService"></param>
         public LoginController(ILoginService loginService)
         {
             _loginService = loginService;
         }
 
-        [HttpGet("login")]
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("mobile-login")]
         public async Task Login(LoginReq req)
         {
             ValidateHelper.IsNullOrWhiteSpace(req.UserPhone, "手机号不能为空！");

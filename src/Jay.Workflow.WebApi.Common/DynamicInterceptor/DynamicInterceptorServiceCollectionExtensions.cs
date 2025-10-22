@@ -1,5 +1,6 @@
 ﻿using AspectCore.Configuration;
 using AspectCore.Extensions.DependencyInjection;
+using Jay.Workflow.WebApi.Common.Exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Jay.Workflow.WebApi.Common.DynamicInterceptor
         {
             if (services == null)
             {
-                throw new Exception(nameof(services));
+                throw new InternalServerException(nameof(services));
             }
 
             // 配置基于拦截器特性的动态代理
@@ -31,12 +32,12 @@ namespace Jay.Workflow.WebApi.Common.DynamicInterceptor
         {
             if (services == null)
             {
-                throw new Exception(nameof(services));
+                throw new InternalServerException(nameof(services));
             }
 
             if (configure == null)
             {
-                throw new Exception(nameof(configure));
+                throw new InternalServerException(nameof(configure));
             }
 
             // 配置全局动态代理

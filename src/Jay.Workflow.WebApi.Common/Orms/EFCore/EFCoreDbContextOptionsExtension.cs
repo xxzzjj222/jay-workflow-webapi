@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Jay.Workflow.WebApi.Common.Exceptions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Jay.Workflow.WebApi.Common.Orms.EFCore
         {
             if (optionsBuilder == null)
             {
-                throw new Exception(nameof(optionsBuilder));
+                throw new InternalServerException(nameof(optionsBuilder));
             }
             var efcoreLoggerFactory= efcoreLoggerFactoryFunc(serviceProvider);
             return optionsBuilder.UseLoggerFactory(efcoreLoggerFactory);

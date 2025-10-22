@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Jay.Workflow.WebApi.Common.Exceptions;
+using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Jay.Workflow.WebApi.Common.Configurations.DbConfiguration
                 ValidateOptionArgs();
 
                 var condition = _dbConfigurationOption.ConfigType.HasValue ? $" and config_type={(int)_dbConfigurationOption.ConfigType}" : string.Empty;
-                var commandText = $"select {_dbConfigurationOption.ConfigKeyField} as `key`,{_dbConfigurationOption.ConfigValueField} as value from {_dbConfigurationOption.TableName} where status=1{condition};";
+                var commandText = $"select {_dbConfigurationOption.ConfigKeyField} as `key`,{_dbConfigurationOption.ConfigValueField} as value from {_dbConfigurationOption.TableName} where status=1 {condition};";
 
                 using var mysqlConnection = new MySqlConnection(_dbConfigurationOption.ConnStr);
                 mysqlConnection.Open();
@@ -54,22 +55,22 @@ namespace Jay.Workflow.WebApi.Common.Configurations.DbConfiguration
         {
             if (string.IsNullOrWhiteSpace(_dbConfigurationOption.ConnStr))
             {
-                throw new Exception("数据库连接字符串不能为空！");
+                throw new InternalServerException("数据库连接字符串不能为空！");
             }
 
             if (string.IsNullOrWhiteSpace(_dbConfigurationOption.TableName))
             {
-                throw new Exception("数据库配置所属表不能为空！");
+                throw new InternalServerException("数据库配置所属表不能为空！");
             }
 
             if (string.IsNullOrWhiteSpace(_dbConfigurationOption.ConfigKeyField))
             {
-                throw new Exception("数据库配置Key所属列不能为空！");
+                throw new InternalServerException("数据库配置Key所属列不能为空！");
             }
 
             if (string.IsNullOrWhiteSpace(_dbConfigurationOption.ConfigValueField))
             {
-                throw new Exception("数据库配置Value所属列不能为空！");
+                throw new InternalServerException("数据库配置Value所属列不能为空！");
             }
         }
     }

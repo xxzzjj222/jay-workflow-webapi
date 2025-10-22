@@ -8,7 +8,7 @@ namespace Jay.Workflow.WebApi.Service.Controllers.Base
     /// </summary>
     [Authorize]
     [ApiController]
-    [ApiExplorerSettings(GroupName ="BusinessServcie")]
+    [ApiExplorerSettings(GroupName ="BusinessService")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public class BusinessController:ControllerBase
     {

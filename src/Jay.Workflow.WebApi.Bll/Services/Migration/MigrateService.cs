@@ -1,4 +1,5 @@
 ﻿using Jay.Workflow.WebApi.Bll.Interfaces.Migration;
+using Jay.Workflow.WebApi.Common.Exceptions;
 using Jay.Workflow.WebApi.Common.Orms.Dapper;
 using Jay.Workflow.WebApi.Model.Dtos.Business;
 using Microsoft.AspNetCore.Mvc;
@@ -214,7 +215,7 @@ namespace Jay.Workflow.WebApi.Bll.Services.Migration
                 if (!string.IsNullOrWhiteSpace(errorMsg))
                 {
                     _logger.LogError("历史版本信息预处理批次号为：{batchNo}，执行{version}版本预处理操作失败，errorMsg：{errorMsg}！", batchNo, item.Version, errorMsg);
-                    throw new Exception($"{item.Version}版本预处理操作失败，请查看错误日志！");
+                    throw new InternalServerException($"{item.Version}版本预处理操作失败，请查看错误日志！");
                 }
 
                 currentDbVersion = item.Version;
@@ -342,7 +343,7 @@ namespace Jay.Workflow.WebApi.Bll.Services.Migration
                 if(!string.IsNullOrWhiteSpace(errorMsg))
                 {
                     _logger.LogError("版本升级批次号为：{batchNo}，执行{version}版本升级失败，errorMsg：{errorMsg}！", batchNo, item.Version, errorMsg);
-                    throw new Exception($"{item.Version}版本升级失败，请查看错误日志！");
+                    throw new InternalServerException($"{item.Version}版本升级失败，请查看错误日志！");
                 }
 
                 _logger.LogInformation("版本升级批次号为：{batchNo}，结束执行{version}版本的升级！", batchNo, item.Version);

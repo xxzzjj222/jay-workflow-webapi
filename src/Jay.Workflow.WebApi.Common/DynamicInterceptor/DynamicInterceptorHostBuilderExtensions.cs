@@ -1,4 +1,5 @@
 ﻿using AspectCore.Extensions.DependencyInjection;
+using Jay.Workflow.WebApi.Common.Exceptions;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Jay.Workflow.WebApi.Common.DynamicInterceptor
         {
             if (hostBuilder == null)
             {
-                throw new Exception(nameof(hostBuilder));
+                throw new InternalServerException(nameof(hostBuilder));
             }
 
             return hostBuilder.UseServiceProviderFactory(new DynamicProxyServiceProviderFactory());
