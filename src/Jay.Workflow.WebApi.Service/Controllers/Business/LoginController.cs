@@ -31,13 +31,13 @@ namespace Jay.Workflow.WebApi.Service.Controllers.Business
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("mobile-login")]
-        public async Task Login(LoginReq req)
+        public async Task<string> Login(LoginReq req)
         {
             ValidateHelper.IsNullOrWhiteSpace(req.UserPhone, "手机号不能为空！");
             ValidateHelper.IsNullOrWhiteSpace(req.Password, "密码不能为空！");
             ValidateHelper.IsPhoneNumber(req.UserPhone, "手机号格式错误！");
 
-            await _loginService.Login(req);
+            return await _loginService.Login(req);
         }
     }
 }

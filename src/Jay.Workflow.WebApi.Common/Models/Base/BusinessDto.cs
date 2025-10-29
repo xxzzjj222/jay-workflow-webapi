@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jay.Workflow.WebApi.Model.Dtos.Base
+namespace Jay.Workflow.WebApi.Common.Models.Base
 {
     /// <summary>
-    /// 数据传输对象基类
+    /// 业务数据传输对象基类
     /// </summary>
-    public class BaseDto
+    public class BusinessDto : BaseDto
     {
-
     }
 }

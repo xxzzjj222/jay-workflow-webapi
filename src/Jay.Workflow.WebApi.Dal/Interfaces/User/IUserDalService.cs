@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Jay.Workflow.WebApi.Dal.Interfaces.User
 {
-    public interface IUserDalService:IScopedDependency, ICacheDependency
+    public interface IUserDalService:IBaseDal<Storage.Entity.User>, IScopedDependency, ICacheDependency
     {
         Task<List<Storage.Entity.User>> GetUsersAsync(bool asNoTracking = true);
 

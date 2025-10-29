@@ -10,6 +10,11 @@ namespace Jay.Workflow.WebApi.Bll.Interfaces.Login
 {
     public interface ILoginService:IScopedDependency
     {
-        Task Login(LoginReq req);
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        Task<string> Login(LoginReq req);
     }
 }

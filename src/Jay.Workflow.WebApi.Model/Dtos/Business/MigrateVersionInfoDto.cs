@@ -1,4 +1,4 @@
-﻿using Jay.Workflow.WebApi.Model.Dtos.Base;
+﻿using Jay.Workflow.WebApi.Common.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

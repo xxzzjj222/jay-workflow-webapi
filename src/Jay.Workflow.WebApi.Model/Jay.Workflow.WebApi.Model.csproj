@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\Response\" />
+    <Folder Include="Dtos\Base\" />
     <Folder Include="Enums\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jay.Workflow.WebApi.Common\Jay.Workflow.WebApi.Common.csproj" />
   </ItemGroup>
 
 </Project>

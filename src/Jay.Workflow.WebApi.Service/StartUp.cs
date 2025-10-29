@@ -1,4 +1,5 @@
-﻿using Jay.Workflow.WebApi.Common.Cache;
+﻿using Jay.Workflow.WebApi.Bll.Mapper;
+using Jay.Workflow.WebApi.Common.Cache;
 using Jay.Workflow.WebApi.Common.Consts;
 using Jay.Workflow.WebApi.Common.Orms.EFCore;
 using Jay.Workflow.WebApi.Common.Uow;
@@ -97,6 +98,9 @@ namespace Jay.Workflow.WebApi.Service
 
             //BusinessObject
             services.AddBussinessObjectInjection();
+
+            //AutoMapper
+            services.AddAutoMapper(cfg => cfg.AddProfile<AutoMapperProfile>());
 
             //StartUpFilter
             //services.AddTransient<IStartupFilter, MigrateStartupFilter>(); //使用EFCore Migration

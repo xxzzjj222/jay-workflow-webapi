@@ -19,6 +19,8 @@ namespace Jay.Workflow.WebApi.Common.Cache
         Task<T> GetAsync<T>(string key);
 
         Task<bool> DeleteAsync(params string[] keys);
+
+        Task<long> IncrementAsync(string key, long step, TimeSpan? expiry = null);
         #endregion
 
         #region 字符串操作

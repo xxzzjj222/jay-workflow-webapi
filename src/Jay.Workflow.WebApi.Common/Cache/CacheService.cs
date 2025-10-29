@@ -53,6 +53,13 @@ namespace Jay.Workflow.WebApi.Common.Cache
 
             return true;
         }
+
+        public async Task<long> IncrementAsync(string key,long step,TimeSpan? expiry = null)
+        {
+            var newValue = await _redisDb.StringIncrementAsync(key, step).ConfigureAwait(false);
+            await _redisDb.KeyExpireAsync(key, expiry).ConfigureAwait(false);
+            return newValue;
+        }
         #endregion
 
         #region 字符串操作
