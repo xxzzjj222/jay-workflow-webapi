@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Jay.Workflow.WebApi.Storage.Entity.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +14,7 @@ namespace Jay.Workflow.WebApi.Storage.Entity
     /// </summary>
     [Table("user_department")]
     [Comment("用户部门表")]
-    public class UserDepartment
+    public class UserDepartment:BaseEntity
     {
         /// <summary>
         /// 用户id

@@ -76,12 +76,13 @@ namespace Jay.Workflow.WebApi.Bll.Services.Login
                 new Claim(ClaimTypes.MobilePhone,user.UserPhone),
                 new Claim(ClaimTypes.Name,user.UserName)
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Jay"));
-            var expires = DateTime.Now.AddDays(1);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Jay@19961128!Alice@19961226!Now@20251029"));
             var token = new JwtSecurityToken(
                     claims: claims,
                     notBefore: DateTime.Now,
-                    expires: expires,
+                    expires: DateTime.Now.AddDays(1),
+                    issuer:"jay",
+                    audience:"su",
                     signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
 
             string jwtToken = new JwtSecurityTokenHandler().WriteToken(token);

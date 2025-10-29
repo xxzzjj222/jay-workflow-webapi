@@ -5,6 +5,7 @@ using Jay.Workflow.WebApi.Model.Dtos.Request.Login;
 using Jay.Workflow.WebApi.Service.Controllers.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace Jay.Workflow.WebApi.Service.Controllers.Util
 {

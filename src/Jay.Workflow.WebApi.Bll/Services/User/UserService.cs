@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Jay.Workflow.WebApi.Bll.Interfaces.User;
+using Jay.Workflow.WebApi.Common.Exceptions;
 using Jay.Workflow.WebApi.Common.Models.Base;
 using Jay.Workflow.WebApi.Dal.Interfaces.User;
 using Jay.Workflow.WebApi.Model.Dtos.Request.User;
@@ -23,6 +24,11 @@ namespace Jay.Workflow.WebApi.Bll.Services.User
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// 分页查询用户
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
         public async Task<PagingResponse<GetUsersPageResp>> GetUsersPageAsync(GetUsersPageReq req)
         {
             var users = await _userDalService.GetUsersAsync();
@@ -45,8 +51,17 @@ namespace Jay.Workflow.WebApi.Bll.Services.User
             return response;
         }
 
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidParameterException"></exception>
         public async Task<int> CreateUserAsync(CreateUserReq req)
         {
+            var existUser = await _userDalService.GetUserByUserPhoneAsync(req.UserPhone);
+            if (existUser != null) throw new InvalidParameterException("用户手机号已存在");
+
             var user = new Storage.Entity.User
             {
                 UserId = Guid.NewGuid(),

@@ -35,13 +35,27 @@ namespace Jay.Workflow.WebApi.Common.Cache
         public async Task<bool> SetAsync<T>(string key,T value,TimeSpan? expiry = null)
         {
             string strValue=JsonConvert.SerializeObject(value);
-            return await _redisDb.StringSetAsync(key, strValue, expiry).ConfigureAwait(false);
+            if (string.IsNullOrWhiteSpace(strValue))
+            {
+                return false;
+            }
+            else
+            {
+                return await _redisDb.StringSetAsync(key, strValue, expiry).ConfigureAwait(false);
+            }
         }
 
         public async Task<T> GetAsync<T>(string key)
         {
-            string strValue = await _redisDb.StringGetAsync(key).ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(strValue);
+            string? strValue = await _redisDb.StringGetAsync(key).ConfigureAwait(false);
+            if (string.IsNullOrWhiteSpace(strValue))
+            {
+                return default(T);
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<T>(strValue);
+            }
         }
 
         public async Task<bool> DeleteAsync(params string[] keys)

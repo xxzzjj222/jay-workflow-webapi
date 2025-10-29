@@ -27,13 +27,12 @@ namespace Jay.Workflow.WebApi.Service.Controllers.Business
         }
 
         /// <summary>
-        /// 登录
+        /// 分页查询用户
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpGet("users/page")]
-        public async Task<PagingResponse<GetUsersPageResp>> GetUsersPageAsync(GetUsersPageReq req)
+        public async Task<PagingResponse<GetUsersPageResp>> GetUsersPageAsync([FromQuery]GetUsersPageReq req)
         {        
             return await _userService.GetUsersPageAsync(req);
         }
@@ -43,7 +42,6 @@ namespace Jay.Workflow.WebApi.Service.Controllers.Business
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost("user")]
         public async Task<bool> CreateUserAsync(CreateUserReq req)
         {

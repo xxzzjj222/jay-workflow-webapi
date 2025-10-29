@@ -18,6 +18,6 @@ namespace Jay.Workflow.WebApi.Dal.Interfaces.User
         /// </summary>
         /// <param name="userPhone"></param>
         /// <returns></returns>
-        Task<Storage.Entity.User> GetUserByUserPhoneAsync(string userPhone);
+        Task<Storage.Entity.User?> GetUserByUserPhoneAsync(string userPhone);
     }
 }

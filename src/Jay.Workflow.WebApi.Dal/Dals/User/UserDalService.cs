@@ -40,7 +40,7 @@ namespace Jay.Workflow.WebApi.Dal.Dals.User
             return users;
         }
 
-        public async Task<Storage.Entity.User> GetUserByUserPhoneAsync(string userPhone)
+        public async Task<Storage.Entity.User?> GetUserByUserPhoneAsync(string userPhone)
         {
             var users = await GetUsersAsync().ConfigureAwait(false);
             return users.Find(u => u.UserPhone == userPhone);

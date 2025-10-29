@@ -8,13 +8,16 @@ using Jay.Workflow.WebApi.Service.Extensions;
 using Jay.Workflow.WebApi.Service.Filters;
 using Jay.Workflow.WebApi.Service.Middlewares;
 using Jay.Workflow.WebApi.Storage.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using StackExchange.Redis;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
+using System.Text;
 
 namespace Jay.Workflow.WebApi.Service
 {
@@ -95,6 +98,26 @@ namespace Jay.Workflow.WebApi.Service
 
             //Log
             Log.Logger = ServiceCollectionExtension.GetLogConfig("Jay.Workflow.WebApi", false);
+
+            //Auth
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = "jay",
+                    ValidateAudience = true,
+                    ValidAudience = "su",
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Jay@19961128!Alice@19961226!Now@20251029"))
+                };
+            });
+              
 
             //BusinessObject
             services.AddBussinessObjectInjection();
