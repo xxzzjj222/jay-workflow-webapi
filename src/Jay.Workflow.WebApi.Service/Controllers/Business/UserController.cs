@@ -32,9 +32,9 @@ namespace Jay.Workflow.WebApi.Service.Controllers.Business
         /// <param name="req"></param>
         /// <returns></returns>
         [HttpGet("users/page")]
-        public async Task<PagingResponse<GetUsersPageResp>> GetUsersPageAsync([FromQuery]GetUsersPageReq req)
+        public async Task<PagingResponse<GetPageUsersResp>> GetPageUsersAsync([FromQuery] GetPageUsersReq req)
         {        
-            return await _userService.GetUsersPageAsync(req);
+            return await _userService.GetPageUsersAsync(req);
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Jay.Workflow.WebApi.Bll.Interfaces.User
 {
     public interface IUserService:IScopedDependency
     {
-        Task<PagingResponse<GetUsersPageResp>> GetUsersPageAsync(GetUsersPageReq req);
+        Task<PagingResponse<GetPageUsersResp>> GetPageUsersAsync(GetPageUsersReq req);
 
         Task<int> CreateUserAsync(CreateUserReq req);
     }

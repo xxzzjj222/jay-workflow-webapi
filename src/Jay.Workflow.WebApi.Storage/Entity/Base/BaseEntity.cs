@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -38,6 +39,11 @@ namespace Jay.Workflow.WebApi.Storage.Entity.Base
         [Column("modified_time")]
         public DateTime? ModifiedTime { get; set; }
         /// <summary>
+        /// IsDeleted
+        /// </summary>
+        [Comment("是否删除")]
+        public bool IsDeleted { get; set; }
+        /// <summary>
         /// 删除人
         /// </summary>
         [Column("deleter")]
@@ -74,6 +80,7 @@ namespace Jay.Workflow.WebApi.Storage.Entity.Base
         /// <param name="userId"></param>
         public void UpdateDeletation(int userId)
         {
+            IsDeleted = true;
             Deleter = userId;
             DeletedTime = DateTime.Now;
         }

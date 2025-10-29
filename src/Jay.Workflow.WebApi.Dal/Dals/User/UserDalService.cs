@@ -1,7 +1,9 @@
 ﻿using Jay.Workflow.WebApi.Common.Cache;
+using Jay.Workflow.WebApi.Common.Utils;
 using Jay.Workflow.WebApi.Dal.Interfaces.User;
 using Jay.Workflow.WebApi.Model.Consts;
 using Jay.Workflow.WebApi.Storage.Context;
+using Jay.Workflow.WebApi.Storage.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -38,6 +40,20 @@ namespace Jay.Workflow.WebApi.Dal.Dals.User
             await _cacheService.SetAsync(CacheKeyConst.User, users, TimeSpan.FromDays(7)).ConfigureAwait(false);
 
             return users;
+        }
+
+        public async Task<(List<Storage.Entity.User> data, int count)> GetPageUsersAsync(int pageIndex, int pageSize, string? keyword = null)
+        {
+            var users = await GetUsersAsync(true);
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                users = users.Where(u => u.UserName.Contains(keyword) || u.UserPhone.Contains(keyword)).ToList();
+            }
+
+            var pageData = users.OrderByDescending(u => u.CreatedTime).PagedList(pageIndex, pageSize);
+            var count = users.Count();
+
+            return (pageData, count);
         }
 
         public async Task<Storage.Entity.User?> GetUserByUserPhoneAsync(string userPhone)

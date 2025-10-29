@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jay.Workflow.WebApi.Model.Dtos.Request.User
+namespace Jay.Workflow.WebApi.Model.Dtos.Request.Workflow.WorkflowCategory
 {
-    public class GetPageUsersReq : PagingRequest
+    public class GetPageWorkflowCategoriesReq : PagingRequest
     {
+
     }
 }

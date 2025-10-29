@@ -12,7 +12,7 @@ namespace Jay.Workflow.WebApi.Model.Dtos.Request.User
     /// <summary>
     /// 查询用户分页
     /// </summary>
-    public class GetUsersPageResp
+    public class GetPageUsersResp:ResponseDto
     {
         /// <summary>
         /// 用户id

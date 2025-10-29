@@ -29,26 +29,16 @@ namespace Jay.Workflow.WebApi.Bll.Services.User
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        public async Task<PagingResponse<GetUsersPageResp>> GetUsersPageAsync(GetUsersPageReq req)
+        public async Task<PagingResponse<GetPageUsersResp>> GetPageUsersAsync(GetPageUsersReq req)
         {
-            var users = await _userDalService.GetUsersAsync();
+            var (data, count) = await _userDalService.GetPageUsersAsync(req.PageIndex, req.PageSize, req.Keyword);
+            var respData = _mapper.Map<List<GetPageUsersResp>>(data);
 
-            if (!string.IsNullOrWhiteSpace(req.Keyword))
+            return new PagingResponse<GetPageUsersResp>
             {
-                users = users.Where(u => u.UserName.Contains(req.Keyword) || u.UserPhone.Contains(req.Keyword)).ToList();
-            }
-
-            var response = new PagingResponse<GetUsersPageResp>()
-            {
-                Count = users.Count
+                Datas = respData,
+                Count = count
             };
-
-            var currentPageUsers = users.OrderBy(u => u.CreatedTime).Skip(req.PageSize * (req.PageIndex - 1)).Take(req.PageSize).ToList();
-            var respUsers = _mapper.Map<List<GetUsersPageResp>>(currentPageUsers);
-
-            response.Datas.AddRange(respUsers);
-
-            return response;
         }
 
         /// <summary>

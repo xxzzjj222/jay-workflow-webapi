@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,7 +59,14 @@ namespace Jay.Workflow.WebApi.Storage.Context
                     Remark = null,
                     ConfigType = ConfigTypeEnum.Env
                 });
-        }
+
+            var deletableTypes = modelBuilder.Model.GetEntityTypes().Where(t => typeof(IDeletable).IsAssignableFrom(t.ClrType)).Select(t => t.ClrType).ToList();
+            foreach(var type in deletableTypes)
+            {
+                var filterExpression = CreateSoftDeleteFilter(type);
+                modelBuilder.Entity(type).HasQueryFilter(filterExpression);
+            }
+        } 
 
         public override int SaveChanges()
         {
@@ -110,6 +118,19 @@ namespace Jay.Workflow.WebApi.Storage.Context
                     entry.Entity.UpdateDeletation(currentUserId);
                 }
             }
+        }
+
+        /// <summary>
+        /// 软删除
+        /// </summary>
+        /// <param name="entityType"></param>
+        /// <returns></returns>
+        private LambdaExpression CreateSoftDeleteFilter(Type entityType)
+        {
+            var parameter = Expression.Parameter(entityType);
+            var property = Expression.Property(parameter, nameof(IDeletable.IsDeleted));
+            var notDeleted = Expression.Not(property);
+            return Expression.Lambda(notDeleted, parameter);
         }
     }
 }

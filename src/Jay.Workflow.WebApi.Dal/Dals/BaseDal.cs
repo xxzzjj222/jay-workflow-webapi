@@ -219,7 +219,7 @@ namespace Jay.Workflow.WebApi.Dal.Dals
                 query = query.Where(predict);
             }
 
-            return await Task.FromResult(query.AsNoTracking()).ConfigureAwait(false);
+            return await Task.FromResult(query).ConfigureAwait(false);
         }
 
         /// <summary>

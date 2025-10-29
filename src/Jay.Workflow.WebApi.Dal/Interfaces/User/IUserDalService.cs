@@ -13,11 +13,8 @@ namespace Jay.Workflow.WebApi.Dal.Interfaces.User
     {
         Task<List<Storage.Entity.User>> GetUsersAsync(bool asNoTracking = true);
 
-        /// <summary>
-        /// 查询用户
-        /// </summary>
-        /// <param name="userPhone"></param>
-        /// <returns></returns>
+        Task<(List<Storage.Entity.User> data, int count)> GetPageUsersAsync(int pageIndex, int pageSize, string? keyword = null);
+
         Task<Storage.Entity.User?> GetUserByUserPhoneAsync(string userPhone);
     }
 }
