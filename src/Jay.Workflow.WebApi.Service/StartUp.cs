@@ -90,9 +90,9 @@ namespace Jay.Workflow.WebApi.Service
                     Type = SecuritySchemeType.ApiKey
                 });
 
-                //options.OperationFilter<AddResponseHeadersFilter>();
-                //options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
-                //options.OperationFilter<SecurityRequirementsOperationFilter>(true, "Bearer");
+                options.OperationFilter<AddResponseHeadersFilter>();
+                options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+                options.OperationFilter<SecurityRequirementsOperationFilter>(true, "Bearer");
 
             });
 
@@ -147,7 +147,7 @@ namespace Jay.Workflow.WebApi.Service
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.DocExpansion(DocExpansion.List);
+                    c.DocExpansion(DocExpansion.None);
                     c.SwaggerEndpoint("/swagger/BusinessService/swagger.json", "Jay.Workflow.WebApi Business Service");
                     c.SwaggerEndpoint("/swagger/UtilService/swagger.json", "Jay.Workflow.WebApi Util Service");
                 });

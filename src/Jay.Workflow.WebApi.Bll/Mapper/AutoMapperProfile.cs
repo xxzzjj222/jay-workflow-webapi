@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Jay.Workflow.WebApi.Model.Dtos.Business.Workflow.WorkflowCategory;
 using Jay.Workflow.WebApi.Model.Dtos.Request.User;
 using Jay.Workflow.WebApi.Model.Dtos.Response.Workflow.WorkflowCategory;
 using Jay.Workflow.WebApi.Storage.Entity;
@@ -20,6 +21,7 @@ namespace Jay.Workflow.WebApi.Bll.Mapper
 
             #region 工作流分类
             CreateMap<WorkflowCategory, GetPageWorkflowCategoriesResp>();
+            CreateMap<WorkflowCategory,WorkflowCategoryDto>();
             #endregion
         }
     }

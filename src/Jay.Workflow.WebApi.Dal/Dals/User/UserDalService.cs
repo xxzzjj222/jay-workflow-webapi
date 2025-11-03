@@ -62,6 +62,12 @@ namespace Jay.Workflow.WebApi.Dal.Dals.User
             return users.Find(u => u.UserPhone == userPhone);
         }
 
+        public async Task<Storage.Entity.User?> GetUserByUserIdAsync(Guid userId)
+        {
+            var users = await GetUsersAsync().ConfigureAwait(false);
+            return users.Find(u => u.UserId == userId);
+        }
+
         public async Task<bool> RefreshCacheAsync()
         {
             return await _cacheService.DeleteAsync(CacheKeyConst.User, CacheKeyConst.UserRole, CacheKeyConst.UserDepartment).ConfigureAwait(false);

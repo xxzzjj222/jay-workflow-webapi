@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Dtos\Base\" />
-    <Folder Include="Enums\" />
   </ItemGroup>
 
   <ItemGroup>

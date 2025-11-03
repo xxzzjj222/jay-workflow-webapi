@@ -16,5 +16,7 @@ namespace Jay.Workflow.WebApi.Dal.Interfaces.User
         Task<(List<Storage.Entity.User> data, int count)> GetPageUsersAsync(int pageIndex, int pageSize, string? keyword = null);
 
         Task<Storage.Entity.User?> GetUserByUserPhoneAsync(string userPhone);
+
+        Task<Storage.Entity.User?> GetUserByUserIdAsync(Guid userId);
     }
 }

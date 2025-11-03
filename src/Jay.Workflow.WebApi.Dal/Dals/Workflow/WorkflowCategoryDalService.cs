@@ -16,7 +16,7 @@ namespace Jay.Workflow.WebApi.Dal.Dals.Workflow
 {
     public class WorkflowCategoryDalService : BaseDal<WorkflowCategory>, IWorkflowCategoryDalService
     {
-        public WorkflowCategoryDalService(WorkflowDbContext dbContext, ICacheService cacheService)
+        public WorkflowCategoryDalService(WorkflowDbContext dbContext)
             : base(dbContext)
         {
             

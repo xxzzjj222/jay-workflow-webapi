@@ -1,25 +1,15 @@
 ﻿using Jay.Workflow.WebApi.Common.Enums;
 using Jay.Workflow.WebApi.Common.Models.Base;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jay.Workflow.WebApi.Model.Dtos.Response.Workflow.WorkflowCategory
+namespace Jay.Workflow.WebApi.Model.Dtos.Request.Workflow.WorkflowCategory
 {
-    /// <summary>
-    /// 工作流分类返回模型
-    /// </summary>
-    public class GetPageWorkflowCategoriesResp:ResponseDto
+    public class UpdateWorkflowCategoryReq:RequestDto
     {
-        /// <summary>
-        /// 分类id
-        /// </summary>
-        public Guid CategoryId { get; set; }
-
         /// <summary>
         /// 名称
         /// </summary>
@@ -39,10 +29,5 @@ namespace Jay.Workflow.WebApi.Model.Dtos.Response.Workflow.WorkflowCategory
         /// 状态
         /// </summary>
         public EnableDisableEnum Status { get; set; } = EnableDisableEnum.Enable;
-
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime CreatedTime { get; set; }
     }
 }

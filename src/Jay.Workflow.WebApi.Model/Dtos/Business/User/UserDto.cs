@@ -1,0 +1,42 @@
+﻿using Jay.Workflow.WebApi.Common.Models.Base;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Jay.Workflow.WebApi.Model.Dtos.Business.User
+{
+    public class UserDto:BusinessDto
+    {
+        /// <summary>
+        /// 用户id
+        /// </summary>
+        public Guid UserId { get; set; }
+
+        /// <summary>
+        /// 用户名称
+        /// </summary>
+        public string UserName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 用户头像
+        /// </summary>
+        public string? UserAvatar { get; set; }
+
+        /// <summary>
+        /// 用户手机号
+        /// </summary>
+        public string UserPhone { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 用户邮箱
+        /// </summary>
+        public string? UserEmail { get; set; }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreatedTime { get; set; }
+    }
+}
