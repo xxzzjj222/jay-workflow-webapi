@@ -61,7 +61,7 @@ namespace Jay.Workflow.WebApi.Service.Controllers.Business
         }
 
         /// <summary>
-        /// 更新工作流分裂
+        /// 更新工作流表单
         /// </summary>
         /// <param name="workflowFormId"></param>
         /// <param name="req"></param>

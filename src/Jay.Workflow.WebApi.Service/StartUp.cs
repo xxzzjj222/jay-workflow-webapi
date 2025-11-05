@@ -117,7 +117,14 @@ namespace Jay.Workflow.WebApi.Service
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Jay@19961128!Alice@19961226!Now@20251029"))
                 };
             });
-              
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("default", policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod();
+                });
+            });
 
             //BusinessObject
             services.AddBussinessObjectInjection();
@@ -155,6 +162,7 @@ namespace Jay.Workflow.WebApi.Service
 
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
+            app.UseCors("default");
             app.UseRouting();
 
             app.UseAuthentication();

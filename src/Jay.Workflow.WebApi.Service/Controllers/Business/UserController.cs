@@ -15,6 +15,7 @@ namespace Jay.Workflow.WebApi.Service.Controllers.Business
     /// 登录控制器
     /// </summary>
     [Route("api/user")]
+    [AllowAnonymous]
     public class UserController : BusinessController
     {
         private readonly IUserService _userService;
